@@ -1,0 +1,1 @@
+0 18 * * 1-5 ~/repo/github/tatoflam/web-attendance-automater/run.sh > ~/Downloads/web-attendance-automater.log 2>&1
