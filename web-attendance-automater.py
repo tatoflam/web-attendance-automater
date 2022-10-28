@@ -8,6 +8,7 @@ from const import URL, COMPANY_ID, ID, PASSWORD, COMPANY_ID_XPATH, \
 from selenium.common.exceptions import NoSuchElementException
 import time
 import datetime
+import re
 
 def main():
     dt_now = datetime.datetime.now()
@@ -27,6 +28,7 @@ def main():
 
     wait.until(EC.presence_of_element_located((By.XPATH, TIME_TABLE)))
     
+    pattern = re.compile(r'月|火|水|木|金')
     row = start_row
     
     while True:
@@ -37,15 +39,15 @@ def main():
             break
         except Exception as e:
             print(e)
-                
-        driver.find_element(By.XPATH, end_time_str % row ).send_keys(end_hour)
-        
+                        
         if EC.element_to_be_clickable((By.XPATH, submit_str % row)):
             element = driver.find_element(By.XPATH, date_str % row )
             date = element.text
-            print('%s is clickable' % date)
+            if bool(pattern.search(date)):
+                print('%s is clickable' % date)
+                driver.find_element(By.XPATH, end_time_str % row ).send_keys(end_hour)
+                driver.find_element(By.XPATH, submit_str % row).click()
         
-        driver.find_element(By.XPATH, submit_str % row).click()
         time.sleep(1)
         row +=1
 
