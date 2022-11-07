@@ -1,10 +1,12 @@
 from selenium import webdriver
+from selenium.webdriver.chrome import service as cs
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from const import URL, COMPANY_ID, ID, PASSWORD, COMPANY_ID_XPATH, \
     ID_XPATH, PASSWORD_XPATH, LOGIN_XPATH, TIME_TABLE, LOGOFF_XPATH, \
-    row_str, start_row, date_str, end_time_str, submit_str, end_hour
+    row_str, start_row, date_str, end_time_str, submit_str, end_hour, \
+    PATH_CHROMEDRIVER
 from selenium.common.exceptions import NoSuchElementException
 import time
 import datetime
@@ -13,7 +15,9 @@ import re
 def main():
     dt_now = datetime.datetime.now()
     print('%s : Web attendance automater start' % dt_now)
-    driver=webdriver.Chrome()
+    
+    chrome_service = cs.Service(executable_path=PATH_CHROMEDRIVER)
+    driver = webdriver.Chrome(service=chrome_service)
     driver.get(URL)
     driver.find_element(By.XPATH, COMPANY_ID_XPATH).send_keys(COMPANY_ID)
     driver.find_element(By.XPATH, ID_XPATH).send_keys(ID)

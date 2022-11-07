@@ -1,1 +1,1 @@
-0 14,18,22 * * 1-5 ~/repo/github/tatoflam/web-attendance-automater/run.sh > ~/Downloads/web-attendance-automater.log 2>&1
+0 10,15,18 * * 1-5 cd ~/repo/github/tatoflam/web-attendance-automater; ./run.sh > ~/Downloads/web-attendance-automater.log 2>&1
