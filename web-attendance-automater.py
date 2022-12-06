@@ -8,6 +8,7 @@ from const import URL, COMPANY_ID, ID, PASSWORD, COMPANY_ID_XPATH, \
     row_str, start_row, date_str, end_time_str, submit_str, end_hour, \
     PATH_CHROMEDRIVER
 from selenium.common.exceptions import NoSuchElementException
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 import datetime
 import re
@@ -16,8 +17,9 @@ def main():
     dt_now = datetime.datetime.now()
     print('%s : Web attendance automater start' % dt_now)
     
-    chrome_service = cs.Service(executable_path=PATH_CHROMEDRIVER)
-    driver = webdriver.Chrome(service=chrome_service)
+    # chrome_service = cs.Service(executable_path=PATH_CHROMEDRIVER)
+    # driver = webdriver.Chrome(service=chrome_service)
+    driver = webdriver.Chrome(service=cs.Service(ChromeDriverManager().install()))
     driver.get(URL)
     driver.find_element(By.XPATH, COMPANY_ID_XPATH).send_keys(COMPANY_ID)
     driver.find_element(By.XPATH, ID_XPATH).send_keys(ID)
