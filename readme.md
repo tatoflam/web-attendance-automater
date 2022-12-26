@@ -7,6 +7,7 @@
 
 ```
 python -m venv env1
+source env1/bin/activate
 pip install -r requirements.txt
 ```
 
