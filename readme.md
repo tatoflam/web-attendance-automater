@@ -13,11 +13,18 @@ pip install -r requirements.txt
 
 ## Run (mac)
 
+Come
+
 ```
-source env1/bin/activate
-./run.sh
+./run.sh come
+```
+
+Leave
+
+```
+./run.sh leave
 ```
 
 ## Cron
 
-Ref. crontab.txt
+For scheduling, add `crontab.txt` configuration by `crontab crontab.txt` (CAUTION: this will overwrite existing crontab content. If you do not want to overwrite cron, prepare entire cron configuration file at somewhere like `~/etc/crontab`), add necessary line to the file, then run `crontab ~/etc/crontab`. 
