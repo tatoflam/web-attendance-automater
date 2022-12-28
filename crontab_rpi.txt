@@ -1,0 +1,4 @@
+0 10 * * 1-5 cd ~/repo/tatoflam/web-attendance-automater; ./run.sh come >> ~/Downloads/web-attendance-automater.log 2>&1
+0 13 * * 1-5 cd ~/repo/tatoflam/web-attendance-automater; ./run.sh break_start >> ~/Downloads/web-attendance-automater.log 2>&1
+0 14 * * 1-5 cd ~/repo/tatoflam/web-attendance-automater; ./run.sh break_end >> ~/Downloads/web-attendance-automater.log 2>&1
+0 18 * * 1-5 cd ~/repo/tatoflam/web-attendance-automater; ./run.sh leave >> ~/Downloads/web-attendance-automater.log 2>&1

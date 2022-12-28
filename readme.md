@@ -1,7 +1,23 @@
 # Web attendance automater
 
 勤怠管理Webシステムを自動入力する簡易スクリプトです。
-ログイン情報、WebページのDOM情報等(const.py)はGitリポジトリに含めていません。
+
+- 土日祝日を除く平日のみ実行します
+- vacation.yamlに休日のリストを以下の形式で記載すると、該当日は休暇中と見做して実行しません
+
+  ```yaml
+  vacation: 
+  - 2022-12-29
+  - 2022-12-30
+  - 2022-12-30
+  ```
+
+- ログイン情報、WebページのDOM情報等(const.py)はGitリポジトリに含めていません。
+
+## 動作環境
+
+- Mac OS Monterey (12.3) (Apple M1 Pro)
+- Raspberry Pi zero W
 
 ## Install
 
@@ -11,13 +27,26 @@ source env1/bin/activate
 pip install -r requirements.txt
 ```
 
-## Run (mac)
+## Run
 
 Come
 
 ```
 ./run.sh come
 ```
+
+Break start
+
+```
+./run.sh break_start
+```
+
+Break end
+
+```
+./run.sh break_end
+```
+
 
 Leave
 
