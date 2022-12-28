@@ -11,7 +11,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from const import URL, COMPANY_ID, ID, PASSWORD, COMPANY_ID_XPATH, \
     ID_XPATH, PASSWORD_XPATH, LOGIN_XPATH, ATTENDANCE_TABLE, LOGOFF_XPATH, \
-    ARG_COME, ARG_LEAVE, COME, LEAVE, PUNCH, PATH_CHROMEDRIVER
+    ARG_COME, ARG_LEAVE, ARG_BREAK_START, ARG_BREAK_END, \
+    COME, LEAVE, BREAK_START, BREAK_END, PUNCH, PATH_CHROMEDRIVER
+from util import isBusinessDay, isVacation
 from selenium.common.exceptions import NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.utils import ChromeType
@@ -20,12 +22,17 @@ def main():
     # Parse parameter
     parser = argparse.ArgumentParser()
     parser.add_argument('--parameter', type=str, 
-                        help='specify "come" or "leave"')
+                        help='specify "come", "leave", "break_start", or "break_end"')
     args = parser.parse_args()
     status = args.parameter
-    
-    if not status in [ARG_COME,ARG_LEAVE]:
-        print('please set argument as "come" or "leave"')
+
+    dt_today = datetime.date.today()    
+    if not status in [ARG_COME,ARG_LEAVE,ARG_BREAK_START,ARG_BREAK_END]:
+        print('please set an argument as "come", "leave", "break_start", or "break_end"')
+    elif not isBusinessDay(dt_today):
+        print('Pass attendance as %s is not a business day' % dt_today)
+    elif isVacation(dt_today):
+        print('Pass attendance as %s is vacation' % dt_today)
     else: 
         dt_now = datetime.datetime.now()
         print('%s : Web attendance automater start' % dt_now)
@@ -36,7 +43,9 @@ def main():
         options.add_argument("--disable-extensions")
         options.add_argument("--headless") # if you want it headless	
         
-        if platform.system() == "Linux" and (platform.machine() == "armv6l" or platform.machine() == "armv7l"):  
+        if platform.system() == "Linux" and \
+          (platform.machine() == "armv6l" or \
+           platform.machine() == "armv7l"):  
             # if raspi 32 bit
             options.BinaryLocation = ("/usr/bin/chromium-browser")
             service = Service("/usr/bin/chromedriver")
@@ -74,6 +83,13 @@ def main():
         elif status == ARG_LEAVE:
             driver.find_element(By.XPATH, LEAVE).click()
             print('Leave is clicked')
+        elif status == ARG_BREAK_START:
+            driver.find_element(By.XPATH, BREAK_START).click()
+            print('Break Start is clicked')
+        elif status == ARG_BREAK_END:
+            driver.find_element(By.XPATH, BREAK_END).click()
+            print('Break End is clicked')
+        
         time.sleep(3)
 
         if EC.element_to_be_clickable((By.XPATH, PUNCH)):
