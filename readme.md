@@ -25,6 +25,14 @@ Leave
 ./run.sh leave
 ```
 
-## Cron
+## Schedule
+
+### Cron
 
 For scheduling, add `crontab.txt` configuration by `crontab crontab.txt` (CAUTION: this will overwrite existing crontab content. If you do not want to overwrite cron, prepare entire cron configuration file at somewhere like `~/etc/crontab`), add necessary line to the file, then run `crontab ~/etc/crontab`. 
+
+### Mac configuration
+
+System Preference > Battery > Schedule > Start up or wake
+
+Note that this is not perfect as the Mac(Monterey) allows only one waking point per a day time unit.  
