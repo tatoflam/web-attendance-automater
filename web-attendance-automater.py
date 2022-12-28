@@ -39,10 +39,12 @@ def main():
         if platform.system() == "Linux" and (platform.machine() == "armv6l" or platform.machine() == "armv7l"):  
             # if raspi 32 bit
             options.BinaryLocation = ("/usr/bin/chromium-browser")
-            service = Service("/usr/bin/chromedriver") 
+            service = Service("/usr/bin/chromedriver")
+            print('Using local chromedriver') 
         else:
             # if not raspi, using Chrome
             service = Service(ChromeDriverManager().install()) 
+            print('Using chromedriver installed by ChromeDriverManager')
 
         # web driver manager for Chromium only supports linux 64 bit version
         # driver = webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
