@@ -1,7 +1,11 @@
 import argparse
+import platform
+import time
+import datetime
 
 from selenium import webdriver
-from selenium.webdriver.chrome import service as cs
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -10,9 +14,7 @@ from const import URL, COMPANY_ID, ID, PASSWORD, COMPANY_ID_XPATH, \
     ARG_COME, ARG_LEAVE, COME, LEAVE, PUNCH, PATH_CHROMEDRIVER
 from selenium.common.exceptions import NoSuchElementException
 from webdriver_manager.chrome import ChromeDriverManager
-import time
-import datetime
-import re
+from webdriver_manager.core.utils import ChromeType
 
 def main():
     # Parse parameter
@@ -27,9 +29,27 @@ def main():
     else: 
         dt_now = datetime.datetime.now()
         print('%s : Web attendance automater start' % dt_now)
-        # chrome_service = cs.Service(executable_path=PATH_CHROMEDRIVER)
-        # driver = webdriver.Chrome(service=chrome_service)
-        driver = webdriver.Chrome(service=cs.Service(ChromeDriverManager().install()))
+
+        options = Options()
+        options.add_argument("--disable-infobars")
+        options.add_argument("start-maximized")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--headless") # if you want it headless	
+        
+        if platform.system() == "Linux" and (platform.machine() == "armv6l" or platform.machine() == "armv7l"):  
+            # if raspi 32 bit
+            options.BinaryLocation = ("/usr/bin/chromium-browser")
+            service = Service("/usr/bin/chromedriver")
+            print('Using local chromedriver') 
+        else:
+            # if not raspi, using Chrome
+            service = Service(ChromeDriverManager().install()) 
+            print('Using chromedriver installed by ChromeDriverManager')
+
+        # web driver manager for Chromium only supports linux 64 bit version
+        # driver = webdriver.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
+        
+        driver = webdriver.Chrome(service=service, options=options)
 
         # Login
         driver.get(URL)
