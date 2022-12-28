@@ -29,7 +29,7 @@ def isVacation(date):
     with open('vacation.yaml', 'r') as f:
         data = yaml.safe_load(f)
 
-    print(data)
+    # print(data)
     # Create a list of datetime objects from the data
     # datetime_list = [datetime.fromisoformat(d) for d in data['vacation']]
     datetime_list = [d for d in data['vacation']]
