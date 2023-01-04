@@ -1,6 +1,10 @@
 from datetime import datetime
 import jpholiday
 import yaml
+import os
+
+BASE_DIR = os.path.dirname(__file__)
+LOGGING_CONF = os.path.join(BASE_DIR, 'config/logging.json')
 
 # Check if the date (datetime object) is a business day (weekday and 
 # not a holiday) in Japan

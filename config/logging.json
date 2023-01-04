@@ -1,0 +1,52 @@
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+    "root": {
+      "level": "INFO",
+      "handlers": [
+        "consoleHandler",
+        "logFileHandler"
+      ]
+    },
+    "web-attendance-automater": {
+        "level": "INFO",
+        "handlers": [
+          "consoleHandler",
+          "logFileHandler"
+        ],
+        "propagate": false
+    },
+    "selenium": {
+      "level": "DEBUG",
+      "handlers": [
+        "consoleHandler",
+        "logFileHandler"
+      ],
+      "propagate": false
+  },
+    "handlers": {
+      "consoleHandler": {
+        "class": "logging.StreamHandler",
+        "level": "DEBUG",
+        "formatter": "consoleFormatter",
+        "stream": "ext://sys.stdout"
+      },
+      "logFileHandler": {
+        "class": "logging.handlers.TimedRotatingFileHandler",
+        "level": "DEBUG",
+        "formatter": "logFileFormatter",
+        "filename": "log/web-attendance-automater.log",
+        "when" : "MIDNIGHT",
+        "backupCount": 60,
+        "encoding": "utf-8"
+      }
+    },
+    "formatters": {
+      "consoleFormatter": {
+        "format": "%(asctime)s %(thread)d %(levelname)s %(name)s %(funcName)s %(lineno)d %(message)s"
+      },
+      "logFileFormatter": {
+        "format": "%(asctime)s %(thread)d %(levelname)s %(name)s %(funcName)s %(lineno)d %(message)s"
+      }
+    }
+}

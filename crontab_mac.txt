@@ -1,4 +1,4 @@
-0 10 * * 1-5 cd ~/repo/github/tatoflam/web-attendance-automater2/web-attendance-automater; ./run.sh come >> ~/Downloads/web-attendance-automater2.log 2>&1
-0 13 * * 1-5 cd ~/repo/github/tatoflam/web-attendance-automater2/web-attendance-automater; ./run.sh break_start >> ~/Downloads/web-attendance-automater2.log 2>&1
-0 14 * * 1-5 cd ~/repo/github/tatoflam/web-attendance-automater2/web-attendance-automater; ./run.sh break_end >> ~/Downloads/web-attendance-automater2.log 2>&1
-0 18 * * 1-5 cd ~/repo/github/tatoflam/web-attendance-automater2/web-attendance-automater; ./run.sh leave >> ~/Downloads/web-attendance-automater2.log 2>&1
+50 9 * * 1-5 cd ~/repo/github/tatoflam/web-attendance-automater2/web-attendance-automater; ./run.sh come > ~/Downloads/web-attendance-automater2.out 2>&1
+0 13 * * 1-5 cd ~/repo/github/tatoflam/web-attendance-automater2/web-attendance-automater; ./run.sh break_start > ~/Downloads/web-attendance-automater2.out 2>&1
+0 14 * * 1-5 cd ~/repo/github/tatoflam/web-attendance-automater2/web-attendance-automater; ./run.sh break_end > ~/Downloads/web-attendance-automater2.out 2>&1
+0 18 * * 1-5 cd ~/repo/github/tatoflam/web-attendance-automater2/web-attendance-automater; ./run.sh leave > ~/Downloads/web-attendance-automater2.out 2>&1
